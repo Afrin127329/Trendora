@@ -9,7 +9,7 @@
     "dev": "npm run build && npm run server"
   },
   "keywords": [],
-  "author": "",
+  "author": "Afrin Nahar",
   "license": "ISC",
   "description": "",
   "dependencies": {

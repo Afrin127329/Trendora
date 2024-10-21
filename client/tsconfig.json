@@ -1,7 +1,26 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "module": "ESNext", // Ensures modern ES module resolution
+    "target": "ESNext", // Ensures modern JavaScript features
+    "jsx": "react-jsx", // React JSX support for React 17+ without importing React
+    "moduleResolution": "Node", // Use standard Node module resolution instead of NodeNext
+    "esModuleInterop": true, // Interoperability between CommonJS and ES modules
+    "skipLibCheck": true, // Skip type checking for dependencies for faster builds
+    "strict": true, // Enables strict type checking
+    "allowSyntheticDefaultImports": true, // Allow default imports for non-ES modules
+    "resolveJsonModule": true, // Allow importing JSON files
+    "isolatedModules": true, // Required by Vite for TypeScript compatibility
+    "noEmit": true, // Prevents emitting compiled JavaScript files
+    "forceConsistentCasingInFileNames": true, // Ensure consistent casing in file names
+    "baseUrl": ".", // Base directory for resolving non-relative modules
+    "paths": {
+      "@/*": ["./src/*"] // Aliases for imports from the 'src' directory
+    },
+    "noImplicitAny": false, 
+  },
+  "include": ["src"], // Include your source files
+  "exclude": ["node_modules", "dist"],
+  "ts-node": {
+    "files": true // Ensures compatibility with ts-node if you are using it
+  }
 }
