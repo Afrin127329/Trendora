@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { useState, useContext, createContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 const SearchContext = createContext(null);
 const SearchProvider = ({ children }) => {
@@ -18,4 +18,5 @@ const SearchProvider = ({ children }) => {
 // custom hook
 const useSearch = () => useContext(SearchContext);
 
-export { useSearch, SearchProvider };
+export { SearchProvider, useSearch };
+

@@ -1,72 +1,41 @@
 /* eslint-disable react-refresh/only-export-components */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import axios from "axios";
-import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-// Define the type for the auth state
-interface AuthState {
-  user: null | { [key: string]: any }; // Assuming user is an object, modify the structure as needed
-  token: string;
-}
 
-// Define the context type, which will store the auth state and setter function
-interface AuthContextType {
-  auth: AuthState;
-  setAuth: React.Dispatch<React.SetStateAction<AuthState>>;
-}
-
-// Create context with an undefined initial value
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-// AuthProvider component
-const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [auth, setAuth] = useState<AuthState>({
+// @ts-expect-error
+const AuthContext = createContext();
+const AuthProvider = ({ children }) => {
+  const [auth, setAuth] = useState({
     user: null,
     token: "",
   });
 
-  // Set Authorization header in axios
+  //default axios
   axios.defaults.headers.common["Authorization"] = auth?.token;
 
   useEffect(() => {
     const data = localStorage.getItem("auth");
     if (data) {
-      const parsedData = JSON.parse(data);
+      const parseData = JSON.parse(data);
       setAuth({
-        user: parsedData.user,
-        token: parsedData.token,
+        ...auth,
+        user: parseData.user,
+        token: parseData.token,
       });
     }
+    //eslint-disable-next-line
   }, []);
-
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider value={[auth, setAuth]}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Custom hook to use auth context
-const useAuth = () => {
-  const context = useContext(AuthContext);
-
-  // Check if context is undefined (meaning the hook is used outside a provider)
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-
-  return context;
-};
+// custom hook
+const useAuth = () => useContext(AuthContext);
 
 export { AuthProvider, useAuth };
 

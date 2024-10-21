@@ -8,8 +8,7 @@ const Footer = () => {
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <a href="/" className="flex gap-1 items-center justify-center">
-              <img src="/logo.png" className="h-8 me-3" alt="FlowBite Logo" />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Trendora</span>
+              <img src="./trendoraLogo.png" className="h-[5rem] w-[13rem]" alt="Trendora Logo" />
             </a>
           </div>
           <h4> <a href="https://afrinsportfolio.netlify.app/" target='_blank' className='cursor-pointer text-zinc-700'>Made with ❤️ by Afrin Nahar</a></h4>
