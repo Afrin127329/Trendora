@@ -1,12 +1,14 @@
 import React from 'react'
 import './App.css'
-import Navbar from './components/Layout/Navbar'
+import Layout from './components/Layout/Layout'
 
 function App() {
 
   return (
     <div>
-      <Navbar />
+      <Layout title={"Trendora - shop now"} >
+        <h1>Hello</h1>
+      </Layout>
     </div>
 
   )
