@@ -1,13 +1,13 @@
 import { Badge } from "antd";
-import React from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import { useCart } from "../context/cart";
-import useCategory from "../hooks/useCategory";
-import { Button } from "./ui/button";
 import { useSearch } from "../context/search";
-import axios from "axios";
+import useCategory from "../hooks/useCategory";
+import axiosInstance from "../lib/axiosInstance";
+import { Button } from "./ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 
 const Navbar = () => {
   // @ts-ignore
@@ -32,7 +32,7 @@ const Navbar = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get(
+      const { data } = await axiosInstance.get(
         `/api/v1/product/search/${values.keyword}`
       );
       setValues({ ...values, results: data });
@@ -129,17 +129,21 @@ const Navbar = () => {
               </>
             ) : (
               <li className="nav-item dropdown">
-                <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white">
-                  {auth?.user?.name}
-                </a>
-                <div className="dropdown-menu">
-                  <a href={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`} className="block px-4 py-2">
-                    Dashboard
-                  </a>
-                  <a onClick={handleLogout} className="block px-4 py-2 cursor-pointer">
-                    Logout
-                  </a>
-                </div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger>My Account</DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel><a href="#">
+                      {auth?.user?.name}
+                    </a></DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem><a href={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`} className="block px-4 py-2">
+                      Dashboard
+                    </a></DropdownMenuItem>
+                    <DropdownMenuItem><a onClick={handleLogout} className="block px-4 py-2 cursor-pointer">
+                      Logout
+                    </a></DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </li>
             )}
             <li>

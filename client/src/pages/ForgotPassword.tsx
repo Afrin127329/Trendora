@@ -7,6 +7,7 @@ import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
+import axiosInstance from "../lib/axiosInstance";
 
 const ForgotPasssword = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ const ForgotPasssword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/auth/forgot-password", {
+      const res = await axiosInstance.post("/api/v1/auth/forgot-password", {
         email,
         newPassword,
         answer,

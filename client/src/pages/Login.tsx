@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
@@ -8,6 +7,7 @@ import { Card } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { useAuth } from "../context/auth";
+import axiosInstance from "../lib/axiosInstance";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +21,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/auth/login", {
+      const res = await axiosInstance.post("/api/v1/auth/login", {
         email,
         password,
       });
@@ -93,7 +93,7 @@ const LoginForm = () => {
             </div>
 
             <Button type="submit" className="w-full px-4">
-              LOGIN
+              Login
             </Button>
           </form>
         </Card>

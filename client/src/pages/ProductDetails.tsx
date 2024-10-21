@@ -1,9 +1,9 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
+import axiosInstance from "../lib/axiosInstance";
 
 const ProductDetails = () => {
   const params = useParams();
@@ -17,7 +17,7 @@ const ProductDetails = () => {
 
   const getProduct = async () => {
     try {
-      const { data } = await axios.get(
+      const { data } = await axiosInstance.get(
         `/api/v1/product/get-product/${params.slug}`
       );
       setProduct(data?.product);
@@ -29,7 +29,7 @@ const ProductDetails = () => {
 
   const getSimilarProduct = async (pid, cid) => {
     try {
-      const { data } = await axios.get(
+      const { data } = await axiosInstance.get(
         `/api/v1/product/related-product/${pid}/${cid}`
       );
       setRelatedProducts(data?.products);
