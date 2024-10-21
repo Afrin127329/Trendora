@@ -32,9 +32,6 @@ const Filter = () => {
           </div>
         </div>
       </div>
-
-
-
     </section>
 
   )
