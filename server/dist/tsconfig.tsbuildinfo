@@ -1,1 +1,1 @@
-{"root":["../index.ts"],"version":"5.6.3"}
+{"root":["../index.ts","../config/authhelper.ts","../config/db.ts","../controllers/authcontroller.ts","../controllers/categorycontroller.ts","../controllers/productcontroller.ts","../middlewares/authmiddleware.ts","../models/categorymodel.ts","../models/ordermodel.ts","../models/productmodel.ts","../models/usermodel.ts","../routes/authroute.js","../routes/categoryroutes.js","../routes/productroute.js"],"version":"5.6.3"}

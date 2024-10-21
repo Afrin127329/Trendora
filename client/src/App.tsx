@@ -1,9 +1,10 @@
-import React from 'react';
 import { Route, Routes } from "react-router-dom";
 import './App.css';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+import CreateCategory from './pages/Admin/CreateCategory';
 import CartPage from './pages/CartPage';
 import Categories from './pages/Categories';
-import CategoryProduct from './pages/CategoryProduct';
+import { default as CategoryProduct, default as CreateProduct } from './pages/CategoryProduct';
 import ForgotPasssword from './pages/ForgotPassword';
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
@@ -11,6 +12,7 @@ import Pagenotfound from './pages/PageNotFound';
 import ProductDetails from './pages/ProductDetails';
 import Register from './pages/Register';
 import Search from './pages/Search';
+import AdminRoute from "./Routes/AdminRoute";
 
 function App() {
 
@@ -27,15 +29,15 @@ function App() {
         <Route path="user/orders" element={<Orders />} />
         <Route path="user/profile" element={<Profile />} />
       </Route> */}
-      {/* <Route path="/dashboard" element={<AdminRoute />}>
-      <Route path="admin" element={<AdminDashboard />} />
-      <Route path="admin/create-category" element={<CreateCategory />} />
-      <Route path="admin/create-product" element={<CreateProduct />} />
-      <Route path="admin/product/:slug" element={<UpdateProduct />} />
+      <Route path="/dashboard" element={<AdminRoute />}>
+        <Route path="admin" element={<AdminDashboard />} />
+        <Route path="admin/create-category" element={<CreateCategory />} />
+        <Route path="admin/create-product" element={<CreateProduct />} />
+        {/* <Route path="admin/product/:slug" element={<UpdateProduct />} />
       <Route path="admin/products" element={<Products />} />
       <Route path="admin/users" element={<Users />} />
-      <Route path="admin/orders" element={<AdminOrders />} />
-    </Route> */}
+      <Route path="admin/orders" element={<AdminOrders />} /> */}
+      </Route>
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPasssword />} />
       <Route path="/login" element={<Login />} />

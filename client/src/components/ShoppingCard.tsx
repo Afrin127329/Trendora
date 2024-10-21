@@ -1,15 +1,16 @@
-import React from 'react'
-import { Button } from './ui/button'
+import { toast } from 'react-toastify';
+import { Button } from './ui/button';
 
-const ShoppingCard = () => {
+
+const ShoppingCard = ({ data, cart, setCart }) => {
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-6">
       <a href="#">
-        <img className="p-8 rounded-t-lg" src="/iphone2.webp" alt="product image" />
+        <img className="p-8 rounded-t-lg" src={data.img} alt={data.name} />
       </a>
       <div className="px-5 pb-5">
         <a href="#">
-          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport</h5>
+          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{data.name}</h5>
         </a>
         <div className="flex items-center mt-2.5 mb-5">
           <div className="flex items-center space-x-1 rtl:space-x-reverse">
@@ -32,8 +33,19 @@ const ShoppingCard = () => {
           <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
         </div>
         <div className="flex items-center justify-between">
-          <span className="text-3xl font-bold text-gray-900 ">$599</span>`
-          <Button size='lg'><a href="#">Add to cart</a></Button>
+          <span className="text-xl font-bold text-gray-900 ">{data.price.toLocaleString("en-US", {
+            style: "currency",
+            currency: "BDT",
+          })}</span>
+
+          <Button onClick={() => {
+            setCart([...cart, data]);
+            localStorage.setItem(
+              "cart",
+              JSON.stringify([...cart, data])
+            );
+            toast.success("Item Added to cart");
+          }} size='lg'><a href="#">Add to cart</a></Button>
 
         </div>
       </div>

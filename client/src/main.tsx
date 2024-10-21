@@ -1,10 +1,9 @@
-import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from "react-router-dom"
-import App from './App.tsx'
-import { AuthProvider } from './context/auth.tsx'
-import { CartProvider } from './context/cart.tsx'
-import { SearchProvider } from './context/search.tsx'
+import App from './App'
+import { AuthProvider } from './context/auth'
+import { CartProvider } from './context/cart'
+import { SearchProvider } from './context/search'
 import './index.css'
 createRoot(document.getElementById('root')!).render(
 

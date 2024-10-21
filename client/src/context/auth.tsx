@@ -1,12 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import axios from "axios";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 
 // @ts-expect-error
-const AuthContext = createContext();
-const AuthProvider = ({ children }) => {
+const AuthContext: any = createContext();
+const AuthProvider: any = ({ children }) => {
   const [auth, setAuth] = useState({
     user: null,
     token: "",
