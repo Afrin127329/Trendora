@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/auth";
-import axios from "axios";
+import { CircleX, Edit } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import AdminMenu from "../../components/AdminMenu";
 import CategoryForm from "../../components/Form/CategoryForm";
 import Layout from "../../components/Layout";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../../components/ui/dialog";
 import axiosInstance from "../../lib/axiosInstance";
 const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -17,12 +17,12 @@ const CreateCategory = () => {
   const [updatedName, setUpdatedName] = useState("");
   // @ts-ignore
   const [auth] = useAuth();
+  const token = auth?.token;
 
   //handle Form
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = auth?.token;
       const { data } = await axiosInstance.post(
         "/api/v1/category/create-category",
         { name },
@@ -36,10 +36,10 @@ const CreateCategory = () => {
       if (data?.success) {
         toast.success(`${name} is created`);
         getAllCategory();
-        e.target.reset()
       } else {
         toast.error(data.message);
       }
+      e.target.reset()
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +48,13 @@ const CreateCategory = () => {
   //get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axiosInstance.get("/api/v1/category/get-category");
+      const { data } = await axiosInstance.get("/api/v1/category/get-category",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -66,7 +72,12 @@ const CreateCategory = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(`/api/v1/category/update-category/${selected._id}`, { name: updatedName });
+      const token = auth?.token;
+      const { data } = await axiosInstance.put(`/api/v1/category/update-category/${selected._id}`, { name: updatedName }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
       if (data?.success) {
         toast.success(`${updatedName} is updated`);
         setSelected(null);
@@ -84,7 +95,13 @@ const CreateCategory = () => {
   //delete category
   const handleDelete = async (pId) => {
     try {
-      const { data } = await axios.delete(`/api/v1/category/delete-category/${pId}`);
+      const { data } = await axiosInstance.delete(`/api/v1/category/delete-category/${pId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (data.success) {
         toast.success("Category is deleted");
         getAllCategory();
@@ -109,6 +126,7 @@ const CreateCategory = () => {
               <CategoryForm handleSubmit={handleSubmit} value={name} setValue={setName} />
             </div>
             <div className="max-w-xl mt-4">
+              <h3 className="text-xl font-semibold mb-4">All Categories</h3>
               <table className="table-auto w-full border-collapse">
                 <thead>
                   <tr>
@@ -119,8 +137,8 @@ const CreateCategory = () => {
                 <tbody>
                   {categories?.map((c: any) => (
                     <tr key={c._id}>
-                      <td className="border p-2">{c.name}</td>
-                      <td className="border p-2 flex space-x-2">
+                      <td className="border p-2 w-2/3">{c.name}</td>
+                      <td className="border p-2 flex space-x-2 justify-center gap-4 items-center">
                         <Button
                           onClick={() => {
                             setVisible(true);
@@ -128,10 +146,10 @@ const CreateCategory = () => {
                             setSelected(c);
                           }}
                         >
-                          Edit
+                          <Edit />
                         </Button>
                         <Button variant="destructive" onClick={() => handleDelete(c._id)}>
-                          Delete
+                          <CircleX />
                         </Button>
                       </td>
                     </tr>
@@ -142,9 +160,6 @@ const CreateCategory = () => {
 
             {/* Modal for editing */}
             <Dialog open={visible} onOpenChange={setVisible}>
-              <DialogTrigger asChild>
-                <Button variant="outline">Edit Category</Button>
-              </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>Edit Category</DialogTitle>
@@ -152,7 +167,7 @@ const CreateCategory = () => {
                 </DialogHeader>
                 <form onSubmit={handleUpdate}>
                   <Input value={updatedName} onChange={(e) => setUpdatedName(e.target.value)} className="w-full mt-2" />
-                  <DialogFooter>
+                  <DialogFooter className="mt-4">
                     <Button type="submit">Save changes</Button>
                   </DialogFooter>
                 </form>
