@@ -201,6 +201,29 @@ export const updateProfileController = async (req, res) => {
   }
 };
 
+export const getAllAdminUsersController = async (req, res) => {
+  try {
+    // Find all users whose role is 1
+    const users = await userModel
+      .find({ role: 1 })
+      .select("-password")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      message: "Admin users fetched successfully",
+      users,
+    });
+  } catch (error) {
+    console.error("Error while fetching admin users:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error while fetching admin users",
+      error,
+    });
+  }
+};
+
 //orders
 export const getOrdersController = async (req, res) => {
   try {

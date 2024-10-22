@@ -1,43 +1,61 @@
-import { NavLink } from "react-router-dom";
-
+import { Barcode, CastleIcon, ListOrderedIcon, ShoppingBagIcon, User2Icon } from "lucide-react";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger } from "./ui/sidebar";
+const items = [
+  {
+    title: "Create Category",
+    url: "/dashboard/admin/create-category",
+    icon: <CastleIcon />,
+  },
+  {
+    title: "Create Product",
+    url: "/dashboard/admin/create-product",
+    icon: <ShoppingBagIcon />,
+  },
+  {
+    title: "All Products",
+    url: "/dashboard/admin/products",
+    icon: <Barcode />,
+  },
+  {
+    title: "Orders",
+    url: "/dashboard/admin/orders",
+    icon: <ListOrderedIcon />,
+  },
+  {
+    title: "Users",
+    url: "/dashboard/admin/users",
+    icon: <User2Icon />,
+  },
+]
 const AdminMenu = () => {
   return (
     <div className="text-center">
-      <div className="flex flex-col space-y-2">
-        <h4>
-          <NavLink
-            to="/dashboard/admin"
-            className="text-lg font-semibold hover:text-primary transition-colors"
-            style={{ backgroundColor: "transparent", border: "none" }}
-          >
-            Admin Panel
-          </NavLink>
-        </h4>
-        <NavLink
-          to="/dashboard/admin/create-category"
-          className="p-2 text-base hover:bg-primary/10 rounded-lg transition-all"
-        >
-          Create Category
-        </NavLink>
-        <NavLink
-          to="/dashboard/admin/create-product"
-          className="p-2 text-base hover:bg-primary/10 rounded-lg transition-all"
-        >
-          Create Product
-        </NavLink>
-        <NavLink
-          to="/dashboard/admin/products"
-          className="p-2 text-base hover:bg-primary/10 rounded-lg transition-all"
-        >
-          Products
-        </NavLink>
-        <NavLink
-          to="/dashboard/admin/orders"
-          className="p-2 text-base hover:bg-primary/10 rounded-lg transition-all"
-        >
-          Orders
-        </NavLink>
-      </div>
+      <SidebarProvider className="min-h-0 mb-4 overflow-hidden">
+        <SidebarTrigger />
+        <Sidebar className="top-20 bottom-30 bg-zinc-800">
+          <SidebarContent className="bg-inherit mt-4">
+            <SidebarGroup className="overflow-hidden">
+              <SidebarGroupLabel><a href="/dashboard/admin" className="text-lg font-semibold mb-4">Admin Panel</a></SidebarGroupLabel>
+              <SidebarGroupContent >
+                <SidebarMenu>
+                  {items.map((item) => (
+                    <SidebarMenuItem key={item.title} className="mb-4">
+                      <SidebarMenuButton asChild>
+                        <a href={item.url}>
+                          {item.icon}
+                          <span>{item.title}</span>
+                        </a>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          </SidebarContent>
+        </Sidebar>
+      </SidebarProvider>
+
+
     </div>
   );
 };

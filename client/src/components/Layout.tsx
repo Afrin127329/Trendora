@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { Toaster } from "react-hot-toast";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+
 const Layout = ({ children, title = "Trendora - shop now", description = "Full stack project", keywords = "mern,react,node,mongodb,express,typescript", author = "Afrin Nahar" }) => {
   return (
     <div>

@@ -1,8 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import axios from "axios";
 import DropIn from "braintree-web-drop-in-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
@@ -60,16 +59,16 @@ const CartPage = () => {
     }
   };
 
-  useEffect(() => {
-    getToken();
-  }, [auth?.token]);
+  // useEffect(() => {
+  //   getToken();
+  // }, [auth?.token]);
 
   //handle payments
   const handlePayment = async () => {
     try {
       setLoading(true);
       const { nonce } = await instance.requestPaymentMethod();
-      const { data } = await axios.post("/api/v1/product/braintree/payment", {
+      const { data } = await axiosInstance.post("/api/v1/product/braintree/payment", {
         nonce,
         cart,
       });
@@ -99,16 +98,16 @@ const CartPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             {cart?.map((p) => (
-              <Card key={p._id} className="flex flex-row items-center space-x-4">
+              <Card key={p?._id} className="flex flex-row items-center space-x-4">
                 <img
                   src={`/api/v1/product/product-photo/${p._id}`}
                   className="w-1/4 h-32 object-cover rounded"
-                  alt={p.name}
+                  alt={p?.name}
                 />
                 <div className="w-1/2">
-                  <p className="font-semibold">{p.name}</p>
-                  <p className="text-sm text-gray-500">{p.description.substring(0, 30)}</p>
-                  <p className="font-semibold">Price: {p.price}</p>
+                  <p className="font-semibold">{p?.name}</p>
+                  <p className="text-sm text-gray-500">{p?.description?.substring(0, 30)}</p>
+                  <p className="font-semibold">Price: {p?.price}</p>
                 </div>
                 <Button variant="destructive" onClick={() => removeCartItem(p._id)}>
                   Remove

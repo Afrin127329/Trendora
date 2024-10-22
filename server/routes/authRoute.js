@@ -1,6 +1,7 @@
 import express from "express";
 import {
   forgotPasswordController,
+  getAllAdminUsersController,
   getAllOrdersController,
   getOrdersController,
   loginController,
@@ -35,6 +36,9 @@ router.get("/user-auth", requireSignIn, (req, res) => {
 router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
   res.status(200).send({ ok: true });
 });
+
+// get all the admins
+router.get("all-admin", requireSignIn, isAdmin, getAllAdminUsersController);
 
 //update profile
 router.put("/profile", requireSignIn, updateProfileController);
