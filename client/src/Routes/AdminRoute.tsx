@@ -13,7 +13,7 @@ export default function AdminRoute() {
   useEffect(() => {
     const authCheck = async () => {
       try {
-        const token = auth?.token; // Make sure token exists
+        const token = auth?.token;
         const res = await axiosInstance.get("/api/v1/auth/admin-auth", {
           headers: {
             Authorization: `Bearer ${token}`,  // Pass token in headers

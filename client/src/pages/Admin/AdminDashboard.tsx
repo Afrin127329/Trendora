@@ -1,10 +1,10 @@
-import AdminMenu from "../../components/AdminMenu";
 import Layout from "../../components/Layout";
 import { useAuth } from "../../context/auth";
 "use client"
 
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
+import AdminMenu from "@/components/AdminMenu";
 import { useEffect, useState } from "react";
 import {
   Avatar,
@@ -63,7 +63,8 @@ const AdminDashboard = () => {
     <Layout title="Trendora - Admin Dashboard">
       <div className="container mx-auto my-6 p-6">
         <div className="flex flex-wrap">
-          <div className="w-full md:w-1/4">
+          <div>
+            {/* sidebar  */}
             <AdminMenu />
           </div>
           <div className="w-full md:w-3/4">

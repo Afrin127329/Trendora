@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/context/auth";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -14,15 +15,28 @@ const CreateCategory = () => {
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState<any>(null);
   const [updatedName, setUpdatedName] = useState("");
+  // @ts-ignore
+  const [auth] = useAuth();
 
   //handle Form
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axiosInstance.post("/api/v1/category/create-category", { name });
+      const token = auth?.token;
+      const { data } = await axiosInstance.post(
+        "/api/v1/category/create-category",
+        { name },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       if (data?.success) {
         toast.success(`${name} is created`);
         getAllCategory();
+        e.target.reset()
       } else {
         toast.error(data.message);
       }
