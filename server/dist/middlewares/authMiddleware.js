@@ -5,20 +5,18 @@ import userModel from "../models/userModel.js";
 export const requireSignIn = async (req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
-        // Check if Authorization header exists and follows 'Bearer <token>' format
         if (!authHeader || !authHeader.startsWith("Bearer ")) {
             return res
                 .status(401)
                 .json({ message: "Authorization header missing or malformed" });
         }
-        const token = authHeader.split(" ")[1]; // Extract token part after 'Bearer'
-        console.log("Authorization header:", req.headers.authorization);
-        console.log("Extracted token:", token);
-        // Verify the token using JWT secret
+        const token = authHeader.split(" ")[1];
+        // console.log("Authorization header:", req.headers.authorization);
+        // console.log("Extracted token:", token);
         // @ts-ignore
         const decode = JWT.verify(token, process.env.JWT_SECRET);
-        req.user = decode; // Attach decoded user info to the request object
-        next(); // Proceed to next middleware
+        req.user = decode;
+        next();
     }
     catch (error) {
         console.error("JWT Verification error:", error);
