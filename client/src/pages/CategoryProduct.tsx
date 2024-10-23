@@ -1,5 +1,7 @@
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/context/auth";
+import axiosInstance from "@/lib/axiosInstance";
 import { Select } from "antd";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -16,11 +18,18 @@ const CreateProduct = () => {
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
   const [photo, setPhoto] = useState<any>("");
-
+  const [categoryName, setCategoryName] = useState<string | null>("");
+  // @ts-ignore
+  const [auth] = useAuth();
+  const token = auth?.token;
   // Fetch all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await axiosInstance.get("/api/v1/category/get-category", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -45,13 +54,18 @@ const CreateProduct = () => {
       productData.append("quantity", quantity);
       productData.append("photo", photo);
       productData.append("category", category);
-      const { data } = await axios.post("/api/v1/product/create-product", productData);
-      if (data?.success) {
+      const { data } = await axiosInstance.post("/api/v1/product/create-product", productData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (data?.error) {
         toast.error(data?.message);
       } else {
         toast.success("Product Created Successfully");
         navigate("/dashboard/admin/products");
       }
+      e.target.reset()
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
@@ -66,22 +80,10 @@ const CreateProduct = () => {
             <AdminMenu />
           </div>
           <div className="w-full md:w-3/4">
-            <h1 className="text-2xl font-bold mb-6">Create Product</h1>
-            <div className="space-y-6 w-full md:w-3/4">
-              <Select
-                placeholder="Select a category"
-                size="large"
-                className="w-full mb-3"
-                onChange={(value) => setCategory(value)}
-              >
-                {categories?.map((c: any) => (
-                  <Option key={c._id} value={c._id}>
-                    {c.name}
-                  </Option>
-                ))}
-              </Select>
+            <h1 className="text-2xl font-bold md:w-2/4 mb-12 text-center">Create a Product</h1>
+            <div className="space-y-6 w-full md:flex md:flex-wrap md:items-center md:gap-4">
 
-              <div className="mb-3">
+              <div className="mb-3 md:w-2/4">
                 <label className="block w-full py-2 px-4 border border-dashed rounded-md text-center cursor-pointer hover:bg-gray-50">
                   {photo ? photo.name : "Upload Photo"}
                   <input
@@ -92,31 +94,51 @@ const CreateProduct = () => {
                     hidden
                   />
                 </label>
+
+                {photo && (
+                  <div className="text-center mb-3">
+                    <img
+                      // @ts-ignore
+                      src={URL.createObjectURL(photo)}
+                      alt="product_photo"
+                      className="object-cover h-48 mx-auto"
+                    />
+                  </div>
+                )}
               </div>
 
-              {photo && (
-                <div className="text-center mb-3">
-                  <img
-                    // @ts-ignore
-                    src={URL.createObjectURL(photo)}
-                    alt="product_photo"
-                    className="object-cover h-48 mx-auto"
-                  />
-                </div>
-              )}
+
+
+              <DropdownMenu>
+                <DropdownMenuTrigger className="w-2/4 h-8 border rounded-md">{categoryName ? categoryName : "Select a Category"}</DropdownMenuTrigger>
+                <DropdownMenuContent className="w-full">
+                  {categories?.map((c: any) => (
+                    <DropdownMenuItem
+                      key={c._id}
+                      onSelect={() => (setCategory(c._id), setCategoryName(c.name))}
+                      className="w-full"
+                    >
+                      {c.name}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+
+
 
               <input
                 type="text"
                 value={name}
                 placeholder="Write a name"
-                className="w-full p-2 border rounded-md"
+                className="w-2/4 p-2 border rounded-md"
                 onChange={(e) => setName(e.target.value)}
               />
 
               <textarea
                 value={description}
                 placeholder="Write a description"
-                className="w-full p-2 border rounded-md"
+                className="w-2/4 p-2 border rounded-md"
                 onChange={(e) => setDescription(e.target.value)}
               />
 
@@ -124,7 +146,7 @@ const CreateProduct = () => {
                 type="number"
                 value={price}
                 placeholder="Write a price"
-                className="w-full p-2 border rounded-md"
+                className="w-2/4 p-2 border rounded-md"
                 onChange={(e) => setPrice(e.target.value)}
               />
 
@@ -132,15 +154,15 @@ const CreateProduct = () => {
                 type="number"
                 value={quantity}
                 placeholder="Write a quantity"
-                className="w-full p-2 border rounded-md"
+                className="w-2/4 p-2 border rounded-md"
                 onChange={(e) => setQuantity(e.target.value)}
               />
 
               <button
-                className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className="w-2/4 py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
                 onClick={handleCreate}
               >
-                CREATE PRODUCT
+                Create Product
               </button>
             </div>
           </div>

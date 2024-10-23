@@ -14,7 +14,6 @@ export default function AdminRoute() {
 
   const location = useLocation();
   const { pathname } = location;
-  console.log(pathname)
 
   useEffect(() => {
     const authCheck = async () => {
