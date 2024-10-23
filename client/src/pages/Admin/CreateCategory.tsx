@@ -122,7 +122,7 @@ const CreateCategory = () => {
           </div>
           <div className="w-3/4">
             <h1 className="text-2xl font-semibold mb-4">Manage Category</h1>
-            <div className="p-3 max-w-md">
+            <div className="p-3 max-w-xl">
               <CategoryForm handleSubmit={handleSubmit} value={name} setValue={setName} />
             </div>
             <div className="max-w-xl mt-4">
