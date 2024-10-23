@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/context/auth";
 import axiosInstance from "@/lib/axiosInstance";
@@ -63,7 +64,9 @@ const CreateProduct = () => {
         toast.error(data?.message);
       } else {
         toast.success("Product Created Successfully");
-        navigate("/dashboard/admin/products");
+        setTimeout(() => {
+          navigate("/dashboard/admin/products");
+        }, 2000);
       }
       e.target.reset()
     } catch (error) {
@@ -107,10 +110,8 @@ const CreateProduct = () => {
                 )}
               </div>
 
-
-
               <DropdownMenu>
-                <DropdownMenuTrigger className="w-2/4 h-8 border rounded-md">{categoryName ? categoryName : "Select a Category"}</DropdownMenuTrigger>
+                <DropdownMenuTrigger className="w-2/4 h-12 border rounded-md">{categoryName ? categoryName : "Select a Category"}</DropdownMenuTrigger>
                 <DropdownMenuContent className="w-full">
                   {categories?.map((c: any) => (
                     <DropdownMenuItem
@@ -123,9 +124,6 @@ const CreateProduct = () => {
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
-
-
-
 
               <input
                 type="text"
@@ -158,12 +156,12 @@ const CreateProduct = () => {
                 onChange={(e) => setQuantity(e.target.value)}
               />
 
-              <button
-                className="w-2/4 py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              <Button
+                className="w-2/4 py-2 px-4"
                 onClick={handleCreate}
               >
                 Create Product
-              </button>
+              </Button>
             </div>
           </div>
         </div>

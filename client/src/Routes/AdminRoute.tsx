@@ -1,6 +1,5 @@
 import Layout from "@/components/Layout";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Loader } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../context/auth";
@@ -48,11 +47,41 @@ export default function AdminRoute() {
               <Skeleton className="h-4 w-[300px]" />
             </div>
           </div>
+        ) : (pathname === "/dashboard/admin/create-product") ? (
+          <div className="container mx-auto my-6 p-6">
+            <div className="flex  gap-8">
+              <div className="w-full md:w-1/4">
+                <Skeleton className="h-full rounded-md" />
+              </div>
+              <div className="w-full md:w-3/4">
+                <h1 className="text-2xl font-bold md:w-2/4 mb-12 text-center">
+                  <Skeleton className="h-8" />
+                </h1>
+                <div className="space-y-6 w-full md:flex md:flex-wrap md:items-center md:gap-4">
+                  <div className="mb-3 md:w-2/4">
+                    <Skeleton className="block w-full h-12 rounded-md" />
+                    <Skeleton className="object-cover h-48 mx-auto mt-2 rounded-md" />
+                  </div>
+
+                  <div className="w-2/4">
+                    <Skeleton className="h-12 rounded-md" />
+                  </div>
+
+                  <Skeleton className="w-2/4 h-12 rounded-md" />
+                  <Skeleton className="w-2/4 h-12 rounded-md" />
+                  <Skeleton className="w-2/4 h-12 rounded-md" />
+                  <Skeleton className="w-2/4 h-12 rounded-md" />
+
+                  <Skeleton className="w-2/4 h-12 rounded-md" />
+                </div>
+              </div>
+            </div>
+          </div>
         ) : (
           <Skeleton className="h-4 w-[250px]" />
+
         )
       }
-      <Loader path="" />
     </Layout>
   );
 }

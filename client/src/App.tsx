@@ -4,7 +4,7 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 import CreateCategory from './pages/Admin/CreateCategory';
 import CartPage from './pages/CartPage';
 import Categories from './pages/Categories';
-import { default as CategoryProduct, default as CreateProduct } from './pages/CategoryProduct';
+import { default as CategoryProduct, default as CreateProduct } from './pages/CreateProduct';
 import ForgotPasssword from './pages/ForgotPassword';
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
