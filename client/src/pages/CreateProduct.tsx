@@ -3,7 +3,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { useAuth } from "@/context/auth";
 import axiosInstance from "@/lib/axiosInstance";
 import { Select } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import AdminMenu from "../components/AdminMenu";
@@ -20,6 +20,7 @@ const CreateProduct = () => {
   const [quantity, setQuantity] = useState("");
   const [photo, setPhoto] = useState<any>("");
   const [categoryName, setCategoryName] = useState<string | null>("");
+  const divRef = useRef<HTMLDivElement>(null);
   // @ts-ignore
   const [auth] = useAuth();
   const token = auth?.token;
@@ -42,6 +43,10 @@ const CreateProduct = () => {
 
   useEffect(() => {
     getAllCategory();
+
+    // if (divRef.current) {
+    //   divRef.current.setAttribute('inert', 'true');
+    // }
   }, []);
 
   // Handle product creation
@@ -76,7 +81,7 @@ const CreateProduct = () => {
 
   return (
     <Layout title={"Dashboard - Create Product"}>
-      <div className="container mx-auto my-6 p-6 inert">
+      <div className="container mx-auto my-6 p-6" ref={divRef}>
         <div className="flex flex-wrap">
           <div className="w-full md:w-1/4">
             <AdminMenu />

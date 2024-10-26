@@ -77,7 +77,7 @@ const AdminDashboard = () => {
               </CardHeader>
               <CardContent className="grid gap-6">
                 {admins?.map((admin: any) => (
-                  <div className="flex items-center justify-between space-x-4">
+                  <div className="flex items-center justify-between space-x-4" key={admin?._id}>
                     <div className="flex items-center space-x-4">
                       <Avatar className="h-8 w-8">
                         <AvatarImage src="/avatars/01.png" alt="Image" />
