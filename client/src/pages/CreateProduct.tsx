@@ -66,9 +66,8 @@ const CreateProduct = () => {
         toast.success("Product Created Successfully");
         setTimeout(() => {
           navigate("/dashboard/admin/products");
-        }, 2000);
+        }, 1000);
       }
-      e.target.reset()
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
@@ -77,7 +76,7 @@ const CreateProduct = () => {
 
   return (
     <Layout title={"Dashboard - Create Product"}>
-      <div className="container mx-auto my-6 p-6">
+      <div className="container mx-auto my-6 p-6 inert">
         <div className="flex flex-wrap">
           <div className="w-full md:w-1/4">
             <AdminMenu />
