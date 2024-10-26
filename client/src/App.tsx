@@ -1,7 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import './App.css';
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import AdminOrders from "./pages/Admin/AdminOrders";
 import CreateCategory from './pages/Admin/CreateCategory';
+import Products from "./pages/Admin/Products";
+import UpdateProducts from "./pages/Admin/UpdateProducts";
+import Users from "./pages/Admin/Users";
 import CartPage from './pages/CartPage';
 import Categories from './pages/Categories';
 import { default as CategoryProduct, default as CreateProduct } from './pages/CreateProduct';
@@ -33,10 +37,10 @@ function App() {
         <Route path="admin" element={<AdminDashboard />} />
         <Route path="admin/create-category" element={<CreateCategory />} />
         <Route path="admin/create-product" element={<CreateProduct />} />
-        {/* <Route path="admin/product/:slug" element={<UpdateProduct />} />
-      <Route path="admin/products" element={<Products />} />
-      <Route path="admin/users" element={<Users />} />
-      <Route path="admin/orders" element={<AdminOrders />} /> */}
+        <Route path="admin/product/:slug" element={<UpdateProducts />} />
+        <Route path="admin/products" element={<Products />} />
+        <Route path="admin/users" element={<Users />} />
+        <Route path="admin/orders" element={<AdminOrders />} />
       </Route>
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPasssword />} />

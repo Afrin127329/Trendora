@@ -9,15 +9,14 @@ export default function AdminRoute() {
   const [ok, setOk] = useState(false);
   // eslint-disable-next-line no-unused-vars
   // @ts-ignore
-  const [auth, setAuth] = useAuth();
-
+  const [auth] = useAuth();
+  const token = auth?.token;
   const location = useLocation();
   const { pathname } = location;
 
   useEffect(() => {
     const authCheck = async () => {
       try {
-        const token = auth?.token;
         const res = await axiosInstance.get("/api/v1/auth/admin-auth", {
           headers: {
             Authorization: `Bearer ${token}`,
