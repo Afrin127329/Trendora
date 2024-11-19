@@ -53,7 +53,7 @@ const Products = () => {
                   <img
                     src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
                     alt={p.name}
-                    className="h-48 w-full object-cover rounded-t-lg"
+                    className="h-48 w-full object-cover rounded-t-lg mt-2"
                   />
                   <CardHeader>
                     <CardTitle className="text-lg font-medium">{p.name}</CardTitle>

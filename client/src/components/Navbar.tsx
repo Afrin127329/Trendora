@@ -30,6 +30,7 @@ const Navbar = () => {
     navigate("/login");
   };
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     try {
       const { data } = await axiosInstance.get(

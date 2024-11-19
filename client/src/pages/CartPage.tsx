@@ -95,7 +95,7 @@ const CartPage = () => {
             : "Your cart is empty"}
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
           <div className="space-y-4">
             {cart?.map((p) => (
               <Card key={p?._id} className="flex flex-row items-center space-x-4">
@@ -119,20 +119,20 @@ const CartPage = () => {
           <div>
             <Card>
               <CardHeader>
-                <h2 className="text-xl font-semibold">Cart Summary</h2>
-                <p>Total | Checkout | Payment</p>
+                <h2 className="text-xl font-semibold text-center mt-4">Cart Summary - Checkout</h2>
               </CardHeader>
               <Separator />
               <CardContent>
-                <h4 className="text-lg font-semibold">Total: {totalPrice()}</h4>
+                <h4 className="text-lg font-semibold text-center">Total: {totalPrice()}</h4>
 
                 {auth?.user?.address ? (
-                  <div className="my-3">
+                  <div className="my-3 flex flex-col gap-4 justify-center items-center">
                     <h4 className="font-semibold">Current Address</h4>
                     <p>{auth?.user?.address}</p>
                     <Button
                       variant="outline"
                       onClick={() => navigate("/dashboard/user/profile")}
+                      className="m-3"
                     >
                       Update Address
                     </Button>
