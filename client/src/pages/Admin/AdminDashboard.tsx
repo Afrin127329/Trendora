@@ -4,7 +4,6 @@ import { useAuth } from "../../context/auth";
 
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
-import AdminMenu from "@/components/AdminMenu";
 import { useEffect, useState } from "react";
 import {
   Avatar,
@@ -33,6 +32,7 @@ import {
   PopoverTrigger,
 } from "../../components/ui/popover";
 import axiosInstance from "../../lib/axiosInstance";
+import AdminLayout from "./AdminLayout";
 const AdminDashboard = () => {
   const [admins, setAdmins] = useState([]);
 
@@ -60,12 +60,8 @@ const AdminDashboard = () => {
 
   return (
     <Layout title="Trendora - Admin Dashboard">
-      <div className="container mx-auto my-6 p-6">
-        <div className="flex flex-wrap">
-          <div>
-            {/* sidebar  */}
-            <AdminMenu />
-          </div>
+      <div className="container mx-auto my-6 p-3">
+        <AdminLayout>
           <div className="w-full md:w-3/4">
             <Card>
               <CardHeader>
@@ -135,13 +131,7 @@ const AdminDashboard = () => {
               </CardContent>
             </Card>
           </div>
-
-
-
-
-
-
-        </div>
+        </AdminLayout>
       </div>
     </Layout>
   );

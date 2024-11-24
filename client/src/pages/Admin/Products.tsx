@@ -1,12 +1,12 @@
 import { useAuth } from "@/context/auth";
 import axiosInstance from "@/lib/axiosInstance";
+import { Product } from "@/lib/types";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import AdminMenu from "../../components/AdminMenu";
 import Layout from "../../components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
-import { Product } from "../../lib/types";
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);

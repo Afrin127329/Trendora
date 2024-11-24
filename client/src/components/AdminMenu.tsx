@@ -29,19 +29,23 @@ const items = [
 ]
 const AdminMenu = () => {
   return (
-    <div className="text-center">
-      <SidebarProvider className="min-h-0 mb-4 overflow-hidden">
-        <SidebarTrigger />
-        <Sidebar className="top-20 bottom-30 bg-zinc-800">
-          <SidebarContent className="bg-inherit mt-4">
-            <SidebarGroup className="overflow-hidden">
-              <SidebarGroupLabel><a href="/dashboard/admin" className="text-lg font-semibold mb-4">Admin Panel</a></SidebarGroupLabel>
-              <SidebarGroupContent >
+    <div className=" text-center w-full md:w-1/4">
+      <SidebarProvider className="relative">
+        <SidebarTrigger className="md:hidden" />
+        <Sidebar variant="inset">
+          <SidebarContent className="bg-inherit mt-4 overflow-y-auto">
+            <SidebarGroup>
+              <SidebarGroupLabel>
+                <a href="/dashboard/admin" className="text-lg font-semibold mb-4 block">
+                  Admin Panel
+                </a>
+              </SidebarGroupLabel>
+              <SidebarGroupContent>
                 <SidebarMenu>
                   {items.map((item) => (
                     <SidebarMenuItem key={item.title} className="mb-4">
                       <SidebarMenuButton asChild>
-                        <a href={item.url}>
+                        <a href={item.url} className="flex items-center gap-2">
                           {item.icon}
                           <span>{item.title}</span>
                         </a>
@@ -54,8 +58,6 @@ const AdminMenu = () => {
           </SidebarContent>
         </Sidebar>
       </SidebarProvider>
-
-
     </div>
   );
 };
