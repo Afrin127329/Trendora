@@ -21,7 +21,7 @@ router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
     res.status(200).send({ ok: true });
 });
 // get all the admins
-router.get("all-admin", requireSignIn, isAdmin, getAllAdminUsersController);
+router.get("/all-admin", requireSignIn, isAdmin, getAllAdminUsersController);
 //update profile
 router.put("/profile", requireSignIn, updateProfileController);
 //orders
