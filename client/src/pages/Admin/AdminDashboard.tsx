@@ -44,7 +44,6 @@ const AdminDashboard = () => {
           Authorization: `Bearer ${token}`
         },
       });
-      console.log(data)
       if (data?.success) {
         setAdmins(data?.users);
       }

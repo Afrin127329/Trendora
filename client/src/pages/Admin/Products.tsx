@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import AdminMenu from "../../components/AdminMenu";
 import Layout from "../../components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
+import { Product } from "../../lib/types";
 
 const Products = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   // @ts-ignore
   const [auth] = useAuth();
   const token = auth?.token;
