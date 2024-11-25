@@ -1,7 +1,10 @@
-import React from 'react'
-import { Button } from './ui/button'
 
+import { Button } from './ui/button'
+import iphoneImg from "/iphone2.webp"
+import samsungImg from "/samsung.webp"
 const Hero = () => {
+
+
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
@@ -27,11 +30,11 @@ const Hero = () => {
             <div className="relative h-56 overflow-hidden rounded-lg md:h-[32rem] bg-slate-700">
               {/* <!-- Item 1 --> */}
               <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="/iphone2.webp" className="absolute block object-scale-down w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                <img src={iphoneImg} className="absolute block object-scale-down w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
               </div>
               {/* <!-- Item 2 --> */}
               <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="/samsung.webp" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                <img src={samsungImg} className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
               </div>
               {/* <!-- Item 3 --> */}
               <div className="hidden duration-700 ease-in-out" data-carousel-item>

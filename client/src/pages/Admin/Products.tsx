@@ -1,5 +1,6 @@
 import { useAuth } from "@/context/auth";
 import axiosInstance from "@/lib/axiosInstance";
+import { Product } from "@/lib/types";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -8,7 +9,7 @@ import Layout from "../../components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 
 const Products = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   // @ts-ignore
   const [auth] = useAuth();
   const token = auth?.token;
@@ -53,7 +54,7 @@ const Products = () => {
                   <img
                     src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
                     alt={p.name}
-                    className="h-48 w-full object-cover rounded-t-lg"
+                    className="h-48 w-full object-cover rounded-t-lg mt-2"
                   />
                   <CardHeader>
                     <CardTitle className="text-lg font-medium">{p.name}</CardTitle>
